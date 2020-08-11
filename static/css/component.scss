@@ -1,0 +1,53 @@
+body,html{
+	// 黑白滤镜
+	// -webkit-filter: grayscale(100%); /* webkit */
+	// -moz-filter: grayscale(100%); /*firefox*/
+	// -ms-filter: grayscale(100%); /*ie9*/
+	// -o-filter: grayscale(100%); /*opera*/
+	// filter: grayscale(100%);
+	// filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); /*ie*/
+	// filter: gray; /*ie9- */
+}
+
+.card{
+	width:30%;
+	margin-left:50%;
+	margin-top: 10%;
+	box-shadow: 3px 4px 18px #c2c2c2;
+	padding: 30px;
+	text-align: center;
+	display: inline-block;
+	background-color: rgba(255,255,255,0.5);
+	h1{
+		font-size: 20px;
+		font-weight: 900;
+		margin-bottom: 20px;
+	}
+}
+
+/* 小手 */
+.hand {
+    cursor: pointer;
+}
+/* 溢出隐藏... */
+.Hidden {
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+// 清楚浮动
+.clear{
+    clear: both;
+    overflow: hidden;
+}
+
+.widthCenter{
+	width: 98%;
+	margin: 0 auto;
+	padding: 30px;
+	box-shadow: 3px 4px 18px #c2c2c2;
+	background-color: #fff;
+	border-radius: 10px;
+	min-height: 85vh;
+}
