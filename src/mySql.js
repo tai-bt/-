@@ -190,5 +190,36 @@ MyNode.post('/mysql/UpDataRow',(req,res) =>{
     });
 })
 
+// 查询左侧导航栏
+MyNode.post('/mysql/menuList',(req,res) => {
+    var select = `SELECT * from menuList where userId = ${req.body.userId}`
+    connection.query(select,(error, results, fields)=>{
+        if (error) throw error;
+        res.json({
+            code: 0,
+            message: "请求成功",
+            data:results
+        })
+    })
+})
+
+// 添加父级菜单
+MyNode.post('/mysql/addParentMenu',(req,res)=>{
+    var keys = Object.keys(req.body)
+    var length = []
+    keys.forEach((item,index)=>{
+        length.push("?")
+    })
+    var  addSql = 'INSERT INTO menuList('+ keys +') VALUES('+ length.join(',') + ')';
+    var  addSqlParams = Object.values(req.body);
+    connection.query(addSql,addSqlParams,(error, results, fields)=>{
+        if (error) throw error;
+        res.json({
+            code: 0,
+            message: "成功添加父级菜单",
+            data:null
+        })
+    })
+})
 
 MyNode.listen(8888)

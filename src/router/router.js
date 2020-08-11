@@ -27,6 +27,16 @@ export const navRouter = [
 		}],
 	},
 	{
+		path:'/admin',
+		name:'admin',
+		component: Main,
+		children: [{
+			path: 'menuSet',
+			name: 'menuSet',
+			component: () => import('@/views/admin/menuSet.vue'),
+		}],
+	},
+	{
 		path:'/register',
 		name:'register',
 		component: () => import('@/components/login/register.vue'),
