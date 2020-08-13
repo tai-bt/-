@@ -27,6 +27,16 @@ export const navRouter = [
 		}],
 	},
 	{
+		path:'/table',
+		name:'table',
+		component: Main,
+		children: [{
+			path: 'tableDrag',
+			name: 'tableDrag',
+			component: () => import('@/views/table/tableDrag.vue'),
+		}],
+	},
+	{
 		path:'/admin',
 		name:'admin',
 		component: Main,
@@ -34,6 +44,16 @@ export const navRouter = [
 			path: 'menuSet',
 			name: 'menuSet',
 			component: () => import('@/views/admin/menuSet.vue'),
+		}],
+	},
+	{
+		path:'/tinymce',
+		name:'tinymce',
+		component: Main,
+		children: [{
+			path: 'editor',
+			name: 'editor',
+			component: () => import('@/views/tinymce/tinymce.vue'),
 		}],
 	},
 	{

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2020-08-11 18:02:37
+Date: 2020-08-13 13:24:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,15 +23,24 @@ CREATE TABLE `menulist` (
   `userId` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `id` varchar(255) NOT NULL,
-  `parentId` int(11) NOT NULL,
-  `childrenId` int(11) DEFAULT NULL,
-  `routerLink` varchar(255) DEFAULT NULL
+  `parentId` varchar(225) NOT NULL,
+  `childrenId` varchar(225) DEFAULT NULL,
+  `routerLink` varchar(255) DEFAULT NULL,
+  `roleId` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menulist
 -- ----------------------------
-INSERT INTO `menulist` VALUES ('3942', '第一个', '1597140078624', '0', null, '');
+INSERT INTO `menulist` VALUES ('3942', '表格', '1597140078624', '0', null, '', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '增删改查', '1597196516760', '1597140078624', null, '/home/index', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '列表管理', '1597204429254', '0', null, '', '0');
+INSERT INTO `menulist` VALUES ('3942', '左侧菜单栏', '1597204449952', '1597204429254', null, '/admin/menuSet', '0');
+INSERT INTO `menulist` VALUES ('3942', '可拖拽表格', '1597224318141', '1597140078624', null, '/table/tableDrag', '0,1');
+INSERT INTO `menulist` VALUES ('3942', 'echarts', '1597285576956', '0', null, '', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '地图', '1597285599341', '1597285576956', null, '/echarts/echartsMap', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '富文本编辑器', '1597286425714', '0', null, '', '0,1');
+INSERT INTO `menulist` VALUES ('3942', 'tinymce', '1597286437002', '1597286425714', null, '/tinymce/tinymce', '0,1');
 
 -- ----------------------------
 -- Table structure for node
@@ -56,12 +65,28 @@ INSERT INTO `node` VALUES ('4', '用户ID', '2020-08-04 17:26:53', '基于用户
 INSERT INTO `node` VALUES ('5', '注册', '2020-08-04 17:34:52', '这是一个新用户', '8417');
 INSERT INTO `node` VALUES ('6', '判断', '2020-08-04 17:37:53', '非空判断', '8417');
 INSERT INTO `node` VALUES ('7', '自增ID', '2020-08-06 13:24:00', '将ID设为主键，设为自增', '3942');
-INSERT INTO `node` VALUES ('8', '分页', '2020-08-07 10:42:02', '123', '3942');
+INSERT INTO `node` VALUES ('8', '分页', '2020-08-07 10:42:02', '1234', '3942');
 INSERT INTO `node` VALUES ('9', '分页1', '2020-08-07 10:42:11', '111', '3942');
 INSERT INTO `node` VALUES ('10', '分页2', '2020-08-07 10:42:24', '222', '3942');
 INSERT INTO `node` VALUES ('11', '分页3', '2020-08-07 10:42:38', '333', '3942');
 INSERT INTO `node` VALUES ('12', '分页4', '2020-08-07 10:42:49', '444', '3942');
 INSERT INTO `node` VALUES ('13', '分页5', '2020-08-07 10:43:00', '555', '3942');
+
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `name` varchar(255) DEFAULT NULL,
+  `roleId` int(11) NOT NULL,
+  PRIMARY KEY (`roleId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES ('超级管理员', '0');
+INSERT INTO `role` VALUES ('普通用户', '1');
 
 -- ----------------------------
 -- Table structure for userinfo
@@ -72,12 +97,12 @@ CREATE TABLE `userinfo` (
   `userPassword` varchar(255) NOT NULL,
   `userId` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of userinfo
 -- ----------------------------
-INSERT INTO `userinfo` VALUES ('taibingtao', '123456', '3942', '1');
-INSERT INTO `userinfo` VALUES ('ceshi', '123456', '8417', '2');
-INSERT INTO `userinfo` VALUES ('123', '123456', '4258', '3');
+INSERT INTO `userinfo` VALUES ('taibingtao', '123456', '3942', '1', '0');
+INSERT INTO `userinfo` VALUES ('ceshi', '123456', '8417', '2', '1');

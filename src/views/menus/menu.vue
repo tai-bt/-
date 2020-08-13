@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-for="(item,index) in menuList" :key="index">
-			<el-submenu v-if="item.children && item.children.length>0" :index='item.id'>
+			<el-submenu v-if="item.children && item.children.length>0" :index='item.routerLink || item.id'>
 				<template slot="title">
 					<i :class="item.icon"></i>
 					<span>{{item.name}}</span>
@@ -11,7 +11,7 @@
 				</el-menu-item-group>
 			</el-submenu>
 
-			<el-menu-item v-else :index='item.id'>
+			<el-menu-item v-else :index='item.routerLink || item.id'>
 				<i :class="item.icon"></i>
 				<span slot="title">{{item.name}}</span>
 			</el-menu-item>

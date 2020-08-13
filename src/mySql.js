@@ -14,6 +14,17 @@ const connection = mysql.createConnection({
 });
 connection.connect();
 
+// 查询用户权限下拉框
+MyNode.get('/mysql/roleSelect',(req,res)=>{
+    var select = `SELECT * from role`
+    connection.query(select,(error,results,fields)=>{
+        res.json({
+            code : 0,
+            message : '查询成功',
+            data:results
+        })
+    })
+})
 
 // 注册
 MyNode.post('/mysql/user/register',(req,res)=>{
@@ -85,7 +96,10 @@ MyNode.post('/mysql/user/login',(req,res)=>{
                     res.json({
                         code : 0,
                         message : '登录成功',
-                        data : userInfo.userId
+                        data : {
+                            userId : userInfo.userId,
+                            roleId : userInfo.roleId
+                        }
                     })
                 }else{
                     res.json({
@@ -179,7 +193,7 @@ MyNode.post('/mysql/UpDataRow',(req,res) =>{
     })
     // var modSql = 'UPDATE node SET ' + length.join(',') + ' WHERE id = '+req.body.id ;
     var modSql = `UPDATE node SET ${length.join(',')} WHERE id = ${req.body.id} AND userId = "${req.body.userId}"`
-
+    console.log(modSql)
     connection.query(modSql,modSqlParams, function (error, results) {
         if (error) throw error;
         res.json({
@@ -192,7 +206,7 @@ MyNode.post('/mysql/UpDataRow',(req,res) =>{
 
 // 查询左侧导航栏
 MyNode.post('/mysql/menuList',(req,res) => {
-    var select = `SELECT * from menuList where userId = ${req.body.userId}`
+    var select = `SELECT * from menuList where roleId like "%${req.body.roleId}%"`
     connection.query(select,(error, results, fields)=>{
         if (error) throw error;
         res.json({
@@ -203,23 +217,110 @@ MyNode.post('/mysql/menuList',(req,res) => {
     })
 })
 
-// 添加父级菜单
+// 添加父级&&子集菜单
 MyNode.post('/mysql/addParentMenu',(req,res)=>{
-    var keys = Object.keys(req.body)
-    var length = []
-    keys.forEach((item,index)=>{
-        length.push("?")
+    var repeatError = {
+        code: 1,
+        message: "菜单名称存在重复，请重新输入",
+        data:null
+    }
+    var select = `SELECT * from menuList`
+    connection.query(select,(error, results, fields)=>{
+        if (error) throw error;
+        var str = results.some((item,index) => {
+            return item.name == req.body.name
+        })
+        if(str){
+            res.json(repeatError)
+        }else{
+            add()
+        }
     })
-    var  addSql = 'INSERT INTO menuList('+ keys +') VALUES('+ length.join(',') + ')';
-    var  addSqlParams = Object.values(req.body);
-    connection.query(addSql,addSqlParams,(error, results, fields)=>{
+    function add(){
+        var keys = Object.keys(req.body)
+        var length = []
+        keys.forEach((item,index)=>{
+            length.push("?")
+        })
+        var  addSql = 'INSERT INTO menuList('+ keys +') VALUES('+ length.join(',') + ')';
+        var  addSqlParams = Object.values(req.body);
+        connection.query(addSql,addSqlParams,(error, results, fields)=>{
+            if (error) throw error;
+            res.json({
+                code: 0,
+                message: "成功添加父级菜单",
+                data:null
+            })
+        })
+    }
+})
+
+/**
+ * 菜单删除
+ * 当前菜单如果有子菜单无法进行删除
+ * 这个逻辑在前端做了
+ */
+MyNode.post('/mysql/delectMenu',(req,res)=>{
+    var delectSql = `DELETE FROM menuList WHERE id = "${req.body.id}"`
+    connection.query(delectSql,(error,results,fields)=>{
         if (error) throw error;
         res.json({
             code: 0,
-            message: "成功添加父级菜单",
-            data:null
+            message: "删除成功",
+            data:results
         })
     })
+})
+
+/**
+ * 修改菜单
+ */
+MyNode.post('/mysql/updataMenu',(req,res)=>{
+    var repeatError = {
+        code: 1,
+        message: "菜单名称存在重复，请重新输入",
+        data:null
+    }
+    var select = `SELECT * from menuList`
+    connection.query(select,(error, results, fields)=>{
+        if (error) throw error;
+        var str = results.filter((item,index) => {
+            return item.name == req.body.name 
+        })
+        if(str.length>0){
+            if(str[0].id == req.body.id){
+                updata()
+            }else{
+                res.json(repeatError)
+            }
+        }else{
+            updata()
+        }
+    })
+    /**
+     * 修改
+     */
+    function updata(){
+        var keys = Object.keys(req.body),
+            length = [],
+            modSqlParams = []
+        keys.forEach((item,index)=>{
+            if(item != 'id'){
+                length.push(item + '= ?')
+                modSqlParams.push(req.body[item])
+            }
+        })
+        var upDataSql = `UPDATE menuList SET ${length.join(',')} WHERE id = "${req.body.id}"`
+        connection.query(upDataSql,modSqlParams,(error, results, fields)=>{
+            if (error) throw error;
+
+            res.json({
+                code : 0,
+                message:'修改成功',
+                data:null
+            })
+        })
+    }
 })
 
 MyNode.listen(8888)

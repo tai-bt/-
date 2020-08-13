@@ -9,6 +9,16 @@
 				<el-form-item label="密码">
 					<el-input type="password" v-model="formLabelAlign.userPassword"></el-input>
 				</el-form-item>
+				<el-form-item label="权限">
+					<el-select style="width:100%" v-model="formLabelAlign.roleId" placeholder="请选择">
+						<el-option
+							v-for="item in roleList"
+							:key="item.roleId"
+							:label="item.name"
+							:value="item.roleId">
+						</el-option>
+					</el-select>
+				</el-form-item>
 			</el-form>
 			<el-button @click="register">注册</el-button>
 			<el-button @click="goLogin">已有账号，去登陆</el-button>
@@ -23,8 +33,9 @@ export default {
 			formLabelAlign: {
 				userName: '',
 				userPassword: '',
+				roleId:''
 			},
-			qqq:this.$store.state.qwe
+			roleList:[]
 		}
 	},
 	methods:{
@@ -38,9 +49,17 @@ export default {
 				}
 			})
 		},
+		getRole(){
+			this.$http.get('/mysql/roleSelect').then((res)=>{
+				this.roleList = res.data.data
+			})
+		},
 		goLogin(){
 			this.$router.push({path:'/login'})
 		}
+	},
+	mounted(){
+		this.getRole()
 	}
 }
 </script>

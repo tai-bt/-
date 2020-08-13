@@ -30,33 +30,35 @@
 			:total="total">
 		</el-pagination>
 		<div class="clear"></div>
-		<el-dialog
-			title="提示"
-			:visible.sync="dialogVisible"
-			width="50%"
-			:close-on-click-modal="false"
-			>
-			<el-form label-position="left" label-width="80px" :model="body">
-				<el-form-item label="时间">
-					<el-date-picker
-						style="width:100%"
-						v-model="body.date"
-						type="datetime"
-						placeholder="选择日期时间">
-					</el-date-picker>
-				</el-form-item>
-				<el-form-item label="名称">
-					<el-input v-model="body.name"></el-input>
-				</el-form-item>
-				<el-form-item label="干哈">
-					<el-input v-model="body.resource"></el-input>
-				</el-form-item>
-			</el-form>
-			<span slot="footer" class="dialog-footer">
-				<el-button @click="dialogVisible = false">取 消</el-button>
-				<el-button type="primary" @click="addRow">确 定</el-button>
-			</span>
-		</el-dialog>
+		<div class="homeDialog">
+			<el-dialog
+				title="提示"
+				:visible.sync="dialogVisible"
+				width="50%"
+				:close-on-click-modal="false"
+				>
+				<el-form label-position="left" label-width="80px" :model="body">
+					<el-form-item label="时间">
+						<el-date-picker
+							style="width:100%"
+							v-model="body.date"
+							type="datetime"
+							placeholder="选择日期时间">
+						</el-date-picker>
+					</el-form-item>
+					<el-form-item label="名称">
+						<el-input v-model="body.name"></el-input>
+					</el-form-item>
+					<el-form-item label="干哈">
+						<el-input v-model="body.resource"></el-input>
+					</el-form-item>
+				</el-form>
+				<span slot="footer" class="dialog-footer">
+					<el-button @click="dialogVisible = false">取 消</el-button>
+					<el-button type="primary" @click="addRow">确 定</el-button>
+				</span>
+			</el-dialog>
+		</div>
 	</div>
 </template>
 
@@ -73,7 +75,6 @@ export default {
 			},
 			SheName:"",
 			UpdataIs : false,
-			userId:sessionStorage.getItem('userId'),
 			currentPage:1,
 			pageSize:10,
 			total:0
@@ -85,6 +86,11 @@ export default {
 				this.UpdataIs = false
 			}
 		},
+	},
+	computed:{
+		userId(){
+			return this.$store.state.userId
+		}
 	},
 	methods:{
 		getCopy(){
@@ -118,6 +124,11 @@ export default {
 				this.tableData = res.data.data.list
 				this.total = res.data.data.total
 			})
+		},
+		UpdataList(val){
+			this.UpdataIs = true
+			this.body = val
+			this.dialogVisible = true
 		},
 		addRow(){
 			var value = Object.values(this.body)

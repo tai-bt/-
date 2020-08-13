@@ -59,4 +59,7 @@ export default {
     width: 100%;
     height: 100%;
 }
+#app{
+	background-image: url('./assets/backgroundimg.png');
+}
 </style>

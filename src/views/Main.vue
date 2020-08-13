@@ -2,20 +2,22 @@
 	<div>
 		<el-container>
 			<el-header>
-				<el-button size="small" class="fr t-mr20 t-mt15">退出登录</el-button>
+				<el-button size="small" @click="LogOut" class="fr t-mr20 t-mt15">退出登录</el-button>
 			</el-header>
 			<el-container>
 				<el-aside width="200px">
 					<el-menu
-						style="height:100%;width:100%"
-						default-active="2"
+						style="height:100%;width:100%;border:none"
+						:default-active="$route.path"
 						class="el-menu-vertical-demo"
 						background-color="#545c64"
 						text-color="#fff"
 						active-text-color="#ffd04b"
+						router
+						:unique-opened='true'
 					>
 						<!-- 递归导航组件组件 -->
-						<MenuLeft :menuList='menuList'></MenuLeft>
+						<MenuLeft :menuList='list'></MenuLeft>
 					</el-menu>
 				</el-aside>
 				<el-main>
@@ -30,106 +32,68 @@
 
 <script>
 import MenuLeft from './menus/menu.vue'
+import { mapGetters } from 'vuex'
 export default {
 	components:{MenuLeft},
 	data(){
 		return{
-			menuList:[
-				{
-					name:'导航一',
-					id:'1'
-				},
-				{
-					name:'导航二',
-					id:'2',
-					children:[
-						{
-							name:'导航二---1',
-							id:'2-1',
-						}
-					]
-				},
-				{
-					name:'导航三',
-					id:'3',
-					children:[
-						{
-							name:'导航三---1',
-							id:'3-1',
-							icon:'el-icon-picture-outline-round',
-						}
-					]
-				},
-			],
-			list:[
-				{
-					name:'导航一',
-					id:'1',
-					parentId:0,
-					childrenId:null
-				},
-				{
-					name:'导航二',
-					id:'2',
-					parentId:0,
-					childrenId:'2'
-				},
-				{
-					name:'导航二---1',
-					id:'2-1',
-					parentId:'2',
-					childrenId:null
-				},
-				{
-					name:'导航三',
-					id:'3',
-					parentId:0,
-					childrenId:'3'
-				},
-				{
-					name:'导航三---1',
-					id:'3-1',
-					parentId:3,
-					childrenId:null
-				},
-				{
-					name:'导航三---2',
-					id:'3-2',
-					parentId:3,
-					childrenId:null
-				}
-			]
+			list:[],
+		}
+	},
+	computed:{
+		...mapGetters(['menuList']),
+		roleId(){
+			return this.$store.state.roleId
+		}
+	},
+	watch:{
+		menuList(res){
+			this.list = res
 		}
 	},
 	methods:{
-		forList(){
-			for(var i=this.list.length-1; i>=0; i--){
+		getMenuList(){
+			this.$http.post('/mysql/menuList',{
+				roleId:this.roleId
+			}).then((res)=>{
+				if(res.data.code == 0){
+					this.$store.commit('SET_COLLAPSE',this.forList(res.data.data))
+				}
+			})
+		},
+		forList(val){
+			var list = JSON.parse(JSON.stringify(val))
+			for(var i=list.length-1; i>=0; i--){
 				for(var j=i-1; j>=0; j--){
-					if(this.list[i] && this.list[j]){
-						if(this.list[i].parentId == this.list[j].childrenId){
-							var str = this.list[j].children && this.list[j].children.length>0?this.list[j].children:[]
-							str.push(this.list[i])
-							this.list[j].children = str
-							this.list.splice(i,1)
+					if(list[i] && list[j]){
+						if(list[i].parentId == list[j].id){
+							var str = list[j].children && list[j].children.length>0?list[j].children:[]
+							str.push(list[i])
+							list[j].children = str
+							list.splice(i,1)
 						}
 					}
 				}
 			}
-			console.log(this.list)
+			return list
+		},
+		LogOut(){
+			this.$router.push({path:'/login'})
 		}
 	},
 	mounted(){
-		this.forList()
+		this.getMenuList()
+		
 	}
 }
 </script>
 
 <style scoped lang='scss'>
 .el-header{
-    background-color: #cbd1da;
+    background-color: rgba(203, 209, 218,0.5);
     color: #333;
     text-align: center;
-    line-height: 60px;
+	line-height: 60px;
 }
   
 .el-aside {

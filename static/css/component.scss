@@ -51,3 +51,16 @@ body,html{
 	border-radius: 10px;
 	min-height: 85vh;
 }
+
+.homeDialog{
+    .el-dialog{
+        border-radius: 10px !important
+    }
+    .el-dialog__footer{
+        border-top: 1px solid #f3f7fb;
+        padding:30px 20px;
+    }
+    .el-dialog__footer{
+        text-align: center;
+    }
+}
