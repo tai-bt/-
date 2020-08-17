@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2020-08-13 13:24:36
+Date: 2020-08-17 16:24:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,7 +40,7 @@ INSERT INTO `menulist` VALUES ('3942', '可拖拽表格', '1597224318141', '1597
 INSERT INTO `menulist` VALUES ('3942', 'echarts', '1597285576956', '0', null, '', '0,1');
 INSERT INTO `menulist` VALUES ('3942', '地图', '1597285599341', '1597285576956', null, '/echarts/echartsMap', '0,1');
 INSERT INTO `menulist` VALUES ('3942', '富文本编辑器', '1597286425714', '0', null, '', '0,1');
-INSERT INTO `menulist` VALUES ('3942', 'tinymce', '1597286437002', '1597286425714', null, '/tinymce/tinymce', '0,1');
+INSERT INTO `menulist` VALUES ('3942', 'tinymce', '1597286437002', '1597286425714', null, '/tinymce/editor', '0,1');
 
 -- ----------------------------
 -- Table structure for node

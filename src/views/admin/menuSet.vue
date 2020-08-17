@@ -50,6 +50,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import data from '../data.js'
 export default {
 	data(){
 		return{
