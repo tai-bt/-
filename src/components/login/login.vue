@@ -28,9 +28,8 @@ export default {
 	},
 	methods:{
 		login(){
-			this.$http.post('/mysql/user/login',this.formLabelAlign).then((res)=>{
+			this.$post('/mysql/user/login',this.formLabelAlign).then((res)=>{
 				if(res.data.code == 0){
-					this.$message.success(res.data.message)
 					this.$store.commit('userId',res.data.data.userId)
 					this.$store.commit('roleId',res.data.data.roleId)
 					this.$router.push({path:'/'})

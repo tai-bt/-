@@ -4,8 +4,9 @@ import router from './router';
 
 Vue.config.productionTip = false
 
-import axios from 'axios'
-Vue.prototype.$http = axios
+// import axios from 'axios'
+// Vue.prototype.$http = axios
+import './components/axios/index'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'

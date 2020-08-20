@@ -53,7 +53,7 @@ export default {
 	},
 	methods:{
 		getMenuList(){
-			this.$http.post('/mysql/menuList',{
+			this.$post('/mysql/menuList',{
 				roleId:this.roleId
 			}).then((res)=>{
 				if(res.data.code == 0){

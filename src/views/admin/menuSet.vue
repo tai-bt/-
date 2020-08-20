@@ -94,12 +94,12 @@ export default {
 
 		// 获取用户权限下拉框
 		getRole(){
-			this.$http.get('/mysql/roleSelect').then((res)=>{
+			this.$get('/mysql/roleSelect').then((res)=>{
 				this.roleList = res.data.data
 			})
 		},
 		getMenuList(){
-			this.$http.post('/mysql/menuList',{
+			this.$post('/mysql/menuList',{
 				roleId:this.roleId
 			}).then((res)=>{
 				if(res.data.code == 0){
@@ -146,7 +146,7 @@ export default {
 					routerLink : this.partantMenu.routerLink,
 					roleId : this.partantMenu.roleId
 				}
-				this.$http.post('/mysql/updataMenu',data).then((res)=>{
+				this.$post('/mysql/updataMenu',data).then((res)=>{
 					if(res.data.code == 0){
 						this.AddDialog = false
 						this.getMenuList()
@@ -157,7 +157,7 @@ export default {
 			}else{
 				this.partantMenu.id = new Date().getTime()
 	
-				this.$http.post('/mysql/addParentMenu',this.partantMenu).then((res)=>{
+				this.$post('/mysql/addParentMenu',this.partantMenu).then((res)=>{
 					if(res.data.code == 0){
 						this.AddDialog = false
 						this.getMenuList()
@@ -181,7 +181,7 @@ export default {
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.$http.post('/mysql/delectMenu',{
+					this.$post('/mysql/delectMenu',{
 						id : val.id
 					}).then((res)=>{
 						if(res.data.code == 0){

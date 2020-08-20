@@ -115,7 +115,7 @@ export default {
 
 		// mySql数据库数据
 		MySqlNode(){
-			this.$http.post('/mysql/SqlList',{
+			this.$post('/mysql/SqlList',{
 				name:this.SheName,
 				userId:this.userId,
 				pageSize:this.pageSize,
@@ -139,7 +139,7 @@ export default {
 			this.body.userId = this.userId
 			if(this.UpdataIs){ // 修改
 				this.body.date = this.$options.filters['GMTToStr'](this.body.date)
-				this.$http.post('/mysql/UpDataRow',this.body).then((res)=>{
+				this.$post('/mysql/UpDataRow',this.body).then((res)=>{
 					if(res.data.code == 0){
 						this.MySqlNode()
 						this.dialogVisible = false
@@ -147,7 +147,7 @@ export default {
 				})
 			}else{ // 添加
 				this.body.date = this.$options.filters['GMTToStr'](this.body.date)
-				this.$http.post('/mysql/addRow',this.body).then((res)=>{
+				this.$post('/mysql/addRow',this.body).then((res)=>{
 					if(res.data.code == 0){
 						this.MySqlNode()
 						this.dialogVisible = false
@@ -162,7 +162,7 @@ export default {
 				type: 'warning'
 			}).then(() => {
 				console.log(val.id,this.userId)
-				this.$http.post('/mysql/deleteRow',{
+				this.$post('/mysql/deleteRow',{
 					id:val.id,
 					userId:this.userId
 				}).then((res)=>{
