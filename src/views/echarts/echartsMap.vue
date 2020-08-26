@@ -1,18 +1,29 @@
 <template>
 	<div>
-		<div class="fl" id="echartsMap" style="width:50%;height:500px"></div>
-		<div class="fl" id="echartsMapshanxi" style="width:50%;height:500px"></div>
+		<div class="fl t-mb20" id="echartsMap" style="width:50%;height:500px"></div>
+		<div class="fl t-mb20" id="echartsMapshanxi" style="width:50%;height:500px"></div>
+		<div class="fl t-mb20" id='antvChart' style="width:50%;height:500px"></div>
+		<div class="clear"></div>
 	</div>
 </template>
 
 <script>
 const mapdata = require('../../../static/json/china.json')
 import 'echarts/map/js/province/shanxi'
+
+// import { Chart } from '@antv/g2';
 export default {
 	data(){
 		return{
 			MapData:null,
-			shanxiMap:null
+			shanxiMap:null,
+			data:[
+				{ genre: 'Sports', sold: 275 },
+				{ genre: 'Strategy', sold: 115 },
+				{ genre: 'Action', sold: 120 },
+				{ genre: 'Shooter', sold: 350 },
+				{ genre: 'Other', sold: 150 },
+			]
 		}
 	},
 	methods:{
@@ -101,10 +112,24 @@ export default {
 					}
 				]
 			})
+		},
+		antv(){
+			const antvChart = new this.$chart({
+				container:'antvChart',
+				autoFit: true,
+				height: 500,
+			})
+			// Step 2: 载入数据源
+			antvChart.source(this.data);
+			// Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
+			antvChart.interval().position('genre*sold').color('genre')
+			// Step 4: 渲染图表
+			antvChart.render();
 		}
 	},
 	mounted(){
 		this.getMap()
+		this.antv()
 	}
 }
 </script>

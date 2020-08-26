@@ -122,6 +122,10 @@ export default {
 				currentPage:this.currentPage
 			}).then((res)=>{
 				this.tableData = res.data.data.list
+				if(this.tableData.length == 0 && this.currentPage != 1){
+					this.currentPage = this.currentPage - 1
+					this.MySqlNode()
+				}
 				this.total = res.data.data.total
 			})
 		},

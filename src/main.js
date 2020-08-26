@@ -21,6 +21,9 @@ import store from './components/lib/store'
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 
+import {Chart} from '@antv/g2'
+Vue.prototype.$chart = Chart
+
 
 //时间
 import moment from 'moment'

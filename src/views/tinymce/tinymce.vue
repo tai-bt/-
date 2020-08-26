@@ -1,6 +1,8 @@
 <template>
 	<div>
 		<editor v-model='value' :init="init"></editor>
+		{{value}}
+		<div v-html="value"></div>
 	</div>
 </template>
 
@@ -14,10 +16,6 @@ export default {
 	data(){
 		return{
 			init: {
-				// 引入汉化组件
-				language_url: '../../../static/tinymce/langs/zh_CN.js',
-				// 设定语言为中文
-				language: 'zh_CN',
 				// 组件
 				plugins:
 				'advlist anchor autolink autosave code codesample colorpicker colorpicker contextmenu directionality emoticons fullscreen hr image imagetools insertdatetime link lists media nonbreaking noneditable pagebreak paste preview print save searchreplace spellchecker tabfocus table template textcolor textpattern visualblocks visualchars wordcount',

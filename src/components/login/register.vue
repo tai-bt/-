@@ -40,7 +40,7 @@ export default {
 	},
 	methods:{
 		register(){
-			this.$http.post('/mysql/user/register',this.formLabelAlign).then((res)=>{
+			this.$post('/mysql/user/register',this.formLabelAlign).then((res)=>{
 				if(res.data.code == 0){
 					this.$message.success(res.data.message)
 					this.$router.push({path:'/login'})
@@ -50,7 +50,7 @@ export default {
 			})
 		},
 		getRole(){
-			this.$http.get('/mysql/roleSelect').then((res)=>{
+			this.$get('/mysql/roleSelect').then((res)=>{
 				this.roleList = res.data.data
 			})
 		},
