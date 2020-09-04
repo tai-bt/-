@@ -30,6 +30,17 @@ export default {
 				this.showIs = false;
 			}
 		},
+
+		// 数组对象去重
+		removal(person){
+			let obj = {};
+
+			let peon = person.reduce((cur,next) => {
+				obj[next.id] ? "" : obj[next.id] = true && cur.push(next);
+				return cur;
+			},[]) 
+			return peon
+		},
 	},
 	mounted(){
 		window.addEventListener("scroll", this.backTopShowOperate, true);
