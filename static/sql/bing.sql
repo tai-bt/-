@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2020-08-17 16:24:53
+Date: 2020-09-17 18:09:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,6 +41,8 @@ INSERT INTO `menulist` VALUES ('3942', 'echarts', '1597285576956', '0', null, ''
 INSERT INTO `menulist` VALUES ('3942', '地图', '1597285599341', '1597285576956', null, '/echarts/echartsMap', '0,1');
 INSERT INTO `menulist` VALUES ('3942', '富文本编辑器', '1597286425714', '0', null, '', '0,1');
 INSERT INTO `menulist` VALUES ('3942', 'tinymce', '1597286437002', '1597286425714', null, '/tinymce/editor', '0,1');
+INSERT INTO `menulist` VALUES ('3942', 'canvas', '1600133305178', '0', null, '', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '制作图片', '1600133422410', '1600133305178', null, '/canvas/img', '0,1');
 
 -- ----------------------------
 -- Table structure for node
@@ -53,7 +55,7 @@ CREATE TABLE `node` (
   `resource` longtext,
   `userId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of node
@@ -70,7 +72,6 @@ INSERT INTO `node` VALUES ('9', '分页1', '2020-08-07 10:42:11', '111', '3942')
 INSERT INTO `node` VALUES ('10', '分页2', '2020-08-07 10:42:24', '222', '3942');
 INSERT INTO `node` VALUES ('11', '分页3', '2020-08-07 10:42:38', '333', '3942');
 INSERT INTO `node` VALUES ('12', '分页4', '2020-08-07 10:42:49', '444', '3942');
-INSERT INTO `node` VALUES ('13', '分页5', '2020-08-07 10:43:00', '555', '3942');
 
 -- ----------------------------
 -- Table structure for role
@@ -99,7 +100,7 @@ CREATE TABLE `userinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `roleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of userinfo

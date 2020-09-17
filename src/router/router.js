@@ -57,6 +57,16 @@ export const navRouter = [
 		}],
 	},
 	{
+		path:'/canvas',
+		name:'canvas',
+		component: Main,
+		children: [{
+			path: 'img',
+			name: 'img',
+			component: () => import('@/views/canvas/meadImg.vue'),
+		}],
+	},
+	{
 		path:'/register',
 		name:'register',
 		component: () => import('@/components/login/register.vue'),

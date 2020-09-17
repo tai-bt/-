@@ -24,6 +24,11 @@ Vue.prototype.$echarts = echarts
 import {Chart} from '@antv/g2'
 Vue.prototype.$chart = Chart
 
+import html2canvas from "html2canvas";
+Vue.prototype.$html2canvas = html2canvas
+
+import VueCanvasPoster from 'vue-canvas-poster'
+Vue.use(VueCanvasPoster)
 
 //时间
 import moment from 'moment'
