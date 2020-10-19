@@ -67,6 +67,16 @@ export const navRouter = [
 		}],
 	},
 	{
+		path:'/number',
+		name:'number',
+		component: Main,
+		children: [{
+			path: 'count-to',
+			name: 'count-to',
+			component: () => import('@/views/number/count-to.vue'),
+		}],
+	},
+	{
 		path:'/register',
 		name:'register',
 		component: () => import('@/components/login/register.vue'),
