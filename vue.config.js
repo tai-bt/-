@@ -27,8 +27,8 @@ module.exports = {
       config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
       config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
       config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log']
-      config.output.filename = `[name].${timeNow}.js`
-      config.output.chunkFilename = `[name].${timeNow}.js`
+      config.output.filename = `js/[name].[chunkhash]${timeNow}.js`
+      config.output.chunkFilename = `js/[id].[chunkhash]${timeNow}.js`
     }
   },
   pwa: {
