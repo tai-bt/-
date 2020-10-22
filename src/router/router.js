@@ -77,6 +77,16 @@ export const navRouter = [
 		}],
 	},
 	{
+		path:'/CSS',
+		name:'CSS',
+		component: Main,
+		children: [{
+			path: 'hover',
+			name: 'hover',
+			component: () => import('@/views/CSS/hover.vue'),
+		}],
+	},
+	{
 		path:'/register',
 		name:'register',
 		component: () => import('@/components/login/register.vue'),
