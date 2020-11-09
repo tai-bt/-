@@ -30,11 +30,18 @@ export const navRouter = [
 		path:'/table',
 		name:'table',
 		component: Main,
-		children: [{
-			path: 'tableDrag',
-			name: 'tableDrag',
-			component: () => import('@/views/table/tableDrag.vue'),
-		}],
+		children: [
+			{
+				path: 'tableDrag',
+				name: 'tableDrag',
+				component: () => import('@/views/table/tableDrag.vue'),
+			},
+			{
+				path: 'virtual-scroll',
+				name: 'virtual-scroll',
+				component: () => import('@/views/table/virtual-scroll.vue'),
+			},
+		],
 	},
 	{
 		path:'/admin',

@@ -1,6 +1,6 @@
 <template>
 	<div @mousemove="move">
-		<!-- <span class="hoverOne hand">
+		<span class="hoverOne hand">
 			1111
 		</span>
 		<br>
@@ -8,7 +8,7 @@
 
 		<div class="reflect">
 			<img src="../../assets/backgroundimg.png" alt="">
-		</div> -->
+		</div>
 
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
@@ -38,8 +38,8 @@ export default {
 	},
 	methods:{
 		move(e){
-			// var blur = document.getElementById('blur')
-			// blur.style.transform = `translate(${-(e.clientX * 0.05)}px,${-(e.clientY * 0.05)}px)`
+			var blur = document.getElementById('blur')
+			blur.style.transform = `translate(${-(e.clientX * 0.05)}px,${-(e.clientY * 0.05)}px)`
 		},
 		swiper(){
 			var mySwiper = new Swiper ('.swiper-container', {
@@ -136,7 +136,6 @@ export default {
 		);
 	img {
 		width: 30%;
-		
 	}
 }
 

@@ -20,7 +20,7 @@
 						<MenuLeft :menuList='list'></MenuLeft>
 					</el-menu>
 				</el-aside>
-				<el-main>
+				<el-main id="scroll">
 					<div class="widthCenter">
 						<router-view/>
 					</div>

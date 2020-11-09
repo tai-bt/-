@@ -41,6 +41,40 @@ export default {
 			},[]) 
 			return peon
 		},
+		removalCon(person){
+			var personCopy = JSON.parse(JSON.stringify(person)),
+				list = []
+			personCopy.forEach((itm,ind)=>{
+				if(
+					/**
+					 * 如果有相同的   则把当前的value  push进新数组的当前value
+					 */
+					list.filter((item,index)=>{
+						return item.name == itm.name
+					}).length > 0  
+				){
+					list.filter((item,index)=>{
+						return item.name == itm.name
+					})[0].value.push(itm.value)
+				}else if(
+					/**
+					 * 如果没有相同的   直接把当前的对象push进新数组
+					 */
+					list.filter((item,index)=>{
+						return item.name == itm.name
+					}).length == 0
+				){
+					list.push(
+						{
+							name:itm.name,
+							value : itm.value.split()
+						}
+					)
+				}
+			})
+
+			return list
+		},
 	},
 	mounted(){
 		window.addEventListener("scroll", this.backTopShowOperate, true);
@@ -72,5 +106,6 @@ export default {
 }
 #app{
 	background-image: url('./assets/backgroundimg.png');
+	min-width: 1200px;
 }
 </style>
