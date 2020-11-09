@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2020-09-17 18:09:33
+Date: 2020-11-09 16:29:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,6 +43,11 @@ INSERT INTO `menulist` VALUES ('3942', '富文本编辑器', '1597286425714', '0
 INSERT INTO `menulist` VALUES ('3942', 'tinymce', '1597286437002', '1597286425714', null, '/tinymce/editor', '0,1');
 INSERT INTO `menulist` VALUES ('3942', 'canvas', '1600133305178', '0', null, '', '0,1');
 INSERT INTO `menulist` VALUES ('3942', '制作图片', '1600133422410', '1600133305178', null, '/canvas/img', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '数字', '1602647311875', '0', null, '', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '数字动画', '1602647347114', '1602647311875', null, '/number/count-to', '0,1');
+INSERT INTO `menulist` VALUES ('3942', 'CSS', '1603243892385', '0', null, '', '0,1');
+INSERT INTO `menulist` VALUES ('3942', 'hover', '1603243907565', '1603243892385', null, '/CSS/hover', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '表格大数据优化', '1604899954644', '1597140078624', null, '/table/virtual-scroll', '0,1');
 
 -- ----------------------------
 -- Table structure for node
@@ -55,7 +60,7 @@ CREATE TABLE `node` (
   `resource` longtext,
   `userId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of node
@@ -72,6 +77,7 @@ INSERT INTO `node` VALUES ('9', '分页1', '2020-08-07 10:42:11', '111', '3942')
 INSERT INTO `node` VALUES ('10', '分页2', '2020-08-07 10:42:24', '222', '3942');
 INSERT INTO `node` VALUES ('11', '分页3', '2020-08-07 10:42:38', '333', '3942');
 INSERT INTO `node` VALUES ('12', '分页4', '2020-08-07 10:42:49', '444', '3942');
+INSERT INTO `node` VALUES ('13', '新增', '2020-10-12 10:06:06', '北京新增一例境外输入', '3942');
 
 -- ----------------------------
 -- Table structure for role
