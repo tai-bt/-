@@ -41,6 +41,11 @@ export const navRouter = [
 				name: 'virtual-scroll',
 				component: () => import('@/views/table/virtual-scroll.vue'),
 			},
+			{
+				path: 'dg-table',
+				name: 'dg-table',
+				component: () => import('@/views/table/dg-table.vue'),
+			},
 		],
 	},
 	{
@@ -91,6 +96,16 @@ export const navRouter = [
 			path: 'hover',
 			name: 'hover',
 			component: () => import('@/views/CSS/hover.vue'),
+		}],
+	},
+	{
+		path:'/qrcodejs2',
+		name:'qrcodejs2',
+		component: Main,
+		children: [{
+			path: 'downloadImg',
+			name: 'downloadImg',
+			component: () => import('@/views/qrcodejs2/downloadImg.vue'),
 		}],
 	},
 	{

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<el-button @click="qwe">12312</el-button>
 		<el-table border :data="tabData" style="width: 100%">
 			<el-table-column prop="id" label="日期">
 			</el-table-column>
