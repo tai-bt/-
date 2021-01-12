@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2020-11-09 16:29:07
+Date: 2021-01-12 09:15:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,6 +48,9 @@ INSERT INTO `menulist` VALUES ('3942', '数字动画', '1602647347114', '1602647
 INSERT INTO `menulist` VALUES ('3942', 'CSS', '1603243892385', '0', null, '', '0,1');
 INSERT INTO `menulist` VALUES ('3942', 'hover', '1603243907565', '1603243892385', null, '/CSS/hover', '0,1');
 INSERT INTO `menulist` VALUES ('3942', '表格大数据优化', '1604899954644', '1597140078624', null, '/table/virtual-scroll', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '表头筛选', '1604975746441', '1597140078624', null, '/table/dg-table', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '二维码', '1607651991010', '0', null, '', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '生成二维码并下载', '1607652018610', '1607651991010', null, '/qrcodejs2/downloadImg', '0,1');
 
 -- ----------------------------
 -- Table structure for node
@@ -112,4 +115,4 @@ CREATE TABLE `userinfo` (
 -- Records of userinfo
 -- ----------------------------
 INSERT INTO `userinfo` VALUES ('taibingtao', '123456', '3942', '1', '0');
-INSERT INTO `userinfo` VALUES ('ceshi', '123456', '8417', '2', '1');
+INSERT INTO `userinfo` VALUES ('ceshi', 'qwerasdf', '8417', '2', '1');

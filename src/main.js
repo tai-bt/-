@@ -30,15 +30,6 @@ Vue.prototype.$html2canvas = html2canvas
 import VueCanvasPoster from 'vue-canvas-poster'
 Vue.use(VueCanvasPoster)
 
-import DGTable from 'dg-table'
-import {
-  DgDatePicker,
-  DgCascader } from 'dg-table/lib/packages'
-import 'dg-table/lib/css/index.css'
-Vue.use(DGTable)
-Vue.component(DgDatePicker.name, DgDatePicker)
-Vue.component(DgCascader.name, DgCascader)
-
 //时间
 import moment from 'moment'
 Vue.filter('GMTToStr', function (time) {
