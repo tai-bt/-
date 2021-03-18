@@ -1,6 +1,19 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const MyNode = express()
+
+/**
+ * 解决跨域
+ */
+MyNode.all("/*",(req, res, next)=>{
+    res.header("Access-Control-Allow-Origin", "*");  // 允许所有路径跨域
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1');
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next()
+})
+
 MyNode.use(bodyParser.json())
 
 // 链接MYSQL数据库
