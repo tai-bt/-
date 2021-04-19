@@ -101,7 +101,7 @@ export default {
 	overflow: auto;
 }
 .el-main{
-	height:calc(100vh - 60px);
+	min-height:calc(100vh - 60px);
 	overflow: auto;
 }
 </style>

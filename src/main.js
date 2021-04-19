@@ -37,6 +37,12 @@ Vue.filter('GMTToStr', function (time) {
   return Str
 });
 
+//全局混入
+import util from './components/lib/util.js'
+Vue.mixin(util)
+
+// import '../../com/component.js'
+
 new Vue({
   render: h => h(App),
   router,
