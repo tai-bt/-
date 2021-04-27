@@ -17,7 +17,7 @@
 						:unique-opened='true'
 					>
 						<!-- 递归导航组件组件 -->
-						<MenuLeft :menuList='list'></MenuLeft>
+						<MenuLeft v-for="(item,index) in list" :key="index" :item='item'></MenuLeft>
 					</el-menu>
 				</el-aside>
 				<el-main id="scroll">

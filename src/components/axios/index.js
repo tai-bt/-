@@ -26,7 +26,7 @@ axios.interceptors.request.use((config) => {
 	}
 	// 每次发送请求都自动在header中附加token值
 	obj.headers.token = window.localStorage.getItem('token');
-	obj.headers.post['cacahe-control'] = 'no-cache'; // 清除get请求缓存
+	obj.headers.post['cache-control'] = 'no-cache'; // 清除get请求缓存
 	obj.headers.post.Pragma = 'no-cache'; // 清除get请求缓存
 	return obj;
 }, (error) => {
