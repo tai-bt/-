@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2021-01-12 09:15:20
+Date: 2021-07-12 09:47:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,6 +51,10 @@ INSERT INTO `menulist` VALUES ('3942', '表格大数据优化', '1604899954644',
 INSERT INTO `menulist` VALUES ('3942', '表头筛选', '1604975746441', '1597140078624', null, '/table/dg-table', '0,1');
 INSERT INTO `menulist` VALUES ('3942', '二维码', '1607651991010', '0', null, '', '0,1');
 INSERT INTO `menulist` VALUES ('3942', '生成二维码并下载', '1607652018610', '1607651991010', null, '/qrcodejs2/downloadImg', '0,1');
+INSERT INTO `menulist` VALUES ('3942', '点餐系统', '1620265276577', '0', null, '', '0,1,2');
+INSERT INTO `menulist` VALUES ('3942', '菜品管理', '1620265424570', '1620265276577', null, '/ordering/food-variety', '0,1,2');
+INSERT INTO `menulist` VALUES ('3942', '点餐管理', '1620265454617', '1620265276577', null, '/ordering/place', '0,1,2');
+INSERT INTO `menulist` VALUES ('3942', '餐桌管理', '1623919221011', '1620265276577', null, '/ordering/desk', '0,1,2');
 
 -- ----------------------------
 -- Table structure for node
@@ -83,6 +87,24 @@ INSERT INTO `node` VALUES ('12', '分页4', '2020-08-07 10:42:49', '444', '3942'
 INSERT INTO `node` VALUES ('13', '新增', '2020-10-12 10:06:06', '北京新增一例境外输入', '3942');
 
 -- ----------------------------
+-- Table structure for placelist
+-- ----------------------------
+DROP TABLE IF EXISTS `placelist`;
+CREATE TABLE `placelist` (
+  `deskNum` char(5) NOT NULL COMMENT '桌号',
+  `isCheckout` int(1) NOT NULL DEFAULT '0' COMMENT '0  未结账   1  已结账',
+  `selectList` text COMMENT '菜品',
+  `peopleNum` int(4) DEFAULT NULL COMMENT '吃饭人数'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of placelist
+-- ----------------------------
+INSERT INTO `placelist` VALUES ('1', '0', '[{\"id\":19,\"foodName\":\"糖醋里脊\",\"foodNum\":1,\"price\":50,\"num\":1},{\"id\":22,\"foodName\":\"菠萝鸡块\",\"foodNum\":4,\"price\":50,\"num\":1},{\"id\":20,\"foodName\":\"辣子鸡丁\",\"foodNum\":2,\"price\":30,\"num\":1},{\"id\":21,\"foodName\":\"宫保鸡丁\",\"foodNum\":3,\"price\":45,\"num\":1},{\"id\":23,\"foodName\":\"梅菜扣肉\",\"foodNum\":5,\"price\":60,\"num\":1}]', '10');
+INSERT INTO `placelist` VALUES ('11', '0', '', '0');
+INSERT INTO `placelist` VALUES ('2', '0', '', '0');
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -96,7 +118,8 @@ CREATE TABLE `role` (
 -- Records of role
 -- ----------------------------
 INSERT INTO `role` VALUES ('超级管理员', '0');
-INSERT INTO `role` VALUES ('普通用户', '1');
+INSERT INTO `role` VALUES ('管理员', '1');
+INSERT INTO `role` VALUES ('员工-1', '2');
 
 -- ----------------------------
 -- Table structure for userinfo
@@ -116,3 +139,24 @@ CREATE TABLE `userinfo` (
 -- ----------------------------
 INSERT INTO `userinfo` VALUES ('taibingtao', '123456', '3942', '1', '0');
 INSERT INTO `userinfo` VALUES ('ceshi', 'qwerasdf', '8417', '2', '1');
+
+-- ----------------------------
+-- Table structure for variety
+-- ----------------------------
+DROP TABLE IF EXISTS `variety`;
+CREATE TABLE `variety` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foodName` varchar(255) NOT NULL,
+  `foodNum` int(11) NOT NULL,
+  `price` float(11,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of variety
+-- ----------------------------
+INSERT INTO `variety` VALUES ('19', '糖醋里脊', '1', '50.00');
+INSERT INTO `variety` VALUES ('20', '辣子鸡丁', '2', '30.00');
+INSERT INTO `variety` VALUES ('21', '宫保鸡丁', '3', '45.00');
+INSERT INTO `variety` VALUES ('22', '菠萝鸡块', '4', '50.00');
+INSERT INTO `variety` VALUES ('23', '梅菜扣肉', '5', '60.00');

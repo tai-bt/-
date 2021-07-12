@@ -29,13 +29,9 @@ export default {
 	methods:{
 		login(){
 			this.$post('/mysql/user/login',this.formLabelAlign).then((res)=>{
-				if(res.data.code == 0){
-					this.$store.commit('userId',res.data.data.userId)
-					this.$store.commit('roleId',res.data.data.roleId)
-					this.$router.push({path:'/'})
-				}else{
-					this.$message.warning(res.data.message)
-				}
+				this.$store.commit('userId',res.data.userId)
+				this.$store.commit('roleId',res.data.roleId)
+				this.$router.push({path:'/'})
 			})
 		},
 		goRegister(){

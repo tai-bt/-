@@ -94,16 +94,14 @@ export default {
 		// 获取用户权限下拉框
 		getRole(){
 			this.$get('/mysql/roleSelect').then((res)=>{
-				this.roleList = res.data.data
+				this.roleList = res.data
 			})
 		},
 		getMenuList(){
 			this.$post('/mysql/menuList',{
 				roleId:this.roleId
 			}).then((res)=>{
-				if(res.data.code == 0){
-					this.$store.commit('SET_COLLAPSE',this.forList(res.data.data))
-				}
+				this.$store.commit('SET_COLLAPSE',this.forList(res.data))
 			})
 		},
 		// 处理数据，整成树形
@@ -146,23 +144,15 @@ export default {
 					roleId : this.partantMenu.roleId
 				}
 				this.$post('/mysql/updataMenu',data).then((res)=>{
-					if(res.data.code == 0){
-						this.AddDialog = false
-						this.getMenuList()
-					}else{
-						this.$message.warning(res.data.message)
-					}
+					this.AddDialog = false
+					this.getMenuList()
 				})
 			}else{
 				this.partantMenu.id = new Date().getTime()
 	
 				this.$post('/mysql/addParentMenu',this.partantMenu).then((res)=>{
-					if(res.data.code == 0){
-						this.AddDialog = false
-						this.getMenuList()
-					}else{
-						this.$message.warning(res.data.message)
-					}
+					this.AddDialog = false
+					this.getMenuList()
 				})
 			}
 		},
@@ -183,10 +173,8 @@ export default {
 					this.$post('/mysql/delectMenu',{
 						id : val.id
 					}).then((res)=>{
-						if(res.data.code == 0){
-							this.$message.success('删除成功')
-							this.getMenuList()
-						}
+						this.$message.success('删除成功')
+						this.getMenuList()
 					})
 				})
 			}

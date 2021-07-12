@@ -19,6 +19,7 @@ MyNode.use(bodyParser.json())
 // 链接MYSQL数据库
 const mysql = require('mysql');
 const { join } = require("core-js/fn/array");
+const { findKey } = require("core-js/fn/dict");
 const connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
@@ -206,7 +207,7 @@ MyNode.post('/mysql/UpDataRow',(req,res) =>{
     })
     // var modSql = 'UPDATE node SET ' + length.join(',') + ' WHERE id = '+req.body.id ;
     var modSql = `UPDATE node SET ${length.join(',')} WHERE id = ${req.body.id} AND userId = "${req.body.userId}"`
-    console.log(modSql)
+
     connection.query(modSql,modSqlParams, function (error, results) {
         if (error) throw error;
         res.json({
@@ -334,6 +335,199 @@ MyNode.post('/mysql/updataMenu',(req,res)=>{
             })
         })
     }
+})
+
+/**
+ * 查询菜品
+ */
+MyNode.post('/mysql/variety',(req,res)=>{
+    if(req.body.foodName){
+        var select = `SELECT * FROM variety WHERE foodName like "%${req.body.foodName}%"`
+    }else{
+        var select = `SELECT * from variety`;
+    }
+    connection.query(select,(error,results,fields)=>{
+        res.json({
+            code : 0,
+            message : '查询成功',
+            data:results
+        })
+    })
+})
+/**
+ * 添加菜品
+ */
+MyNode.post('/mysql/add-variety',(req,res)=>{
+    var repeatError = {
+        code: 1,
+        message: "菜品名称重复或菜品编号重复，请重新输入",
+        data:null
+    }
+    var  select = `SELECT * from variety`;
+    connection.query(select,(error,results,fields)=>{
+        let list = results.filter((item,index)=>{
+            return item.foodName == req.body.foodName || item.foodNum == req.body.foodNum
+        })
+        if(list.length > 0){
+            res.json(repeatError)
+        }else{
+            addvariety()
+        }
+    })
+    
+    function addvariety(){
+        let keys = Object.keys(req.body),
+            length = []
+        keys.forEach((item,index)=>{
+            length.push("?")
+        })
+
+        var  addSql = 'INSERT INTO variety('+ keys +') VALUES('+ length.join(',') + ')';
+        var  addSqlParams = Object.values(req.body);
+
+        connection.query(addSql,addSqlParams,(error,results,fields)=>{
+            res.json({
+                code: 0,
+                message: "添加成功",
+                data:results
+            })
+        })
+    }
+})
+/**
+ * 删除菜品
+ */
+MyNode.post('/mysql/delect-variety',(req,res)=>{
+    var  delectSql = `DELETE FROM variety WHERE id=${req.body.id}`;
+
+    connection.query(delectSql, function (error, results) {
+        if (error) throw error;
+        res.json({
+            code: 0,
+            message: "请求成功",
+            data:null
+        })
+    });
+})
+
+/**
+ * 修改菜品
+ */
+MyNode.post('/mysql/updata-variety',(req,res)=>{
+    var  select = `SELECT * from variety`;
+    var repeatError = {
+        code: 1,
+        message: "菜单名称存在重复，请重新输入",
+        data:null
+    };
+    connection.query(select,(error,results,fields)=>{
+        var str = results.filter((item,index) => {
+            return item.foodName == req.body.foodName 
+        })
+        if(str.length>0){
+            if(str[0].id == req.body.id){
+                updata()
+            }else{
+                res.json(repeatError)
+            }
+        }else{
+            updata()
+        }
+    })
+
+    function updata(){
+        var keys = Object.keys(req.body),
+            length = [],
+            modSqlParams = []
+        keys.forEach((item,index)=>{
+            if(item != 'id'){
+                length.push(item + '= ?')
+                modSqlParams.push(req.body[item])
+            }
+        })
+        var upDataSql = `UPDATE variety SET ${length.join(',')} WHERE id = "${req.body.id}"`
+        connection.query(upDataSql,modSqlParams,(error, results, fields)=>{
+            if (error) throw error;
+            res.json({
+                code : 0,
+                message:'修改成功',
+                data:null
+            })
+        })
+    }
+})
+/**
+ * 下单
+ */
+MyNode.post('/mysql/updata-place',(req,res)=>{
+    var select = `SELECT * FROM placelist WHERE deskNum = "${req.body.deskNum}"`
+    connection.query(select,(error,results,fields)=>{
+        var list = results.filter((item,index) => {
+            return item.deskNum == req.body.deskNum 
+        })
+        if(list.length > 0){
+            updata()
+        }else{
+            addplace()
+        }
+    })
+
+    function addplace(){
+        let keys = Object.keys(req.body),
+            length = []
+        keys.forEach((item,index)=>{
+            length.push("?")
+        })
+
+        var  addSql = 'INSERT INTO placelist('+ keys +') VALUES('+ length.join(',') + ')';
+        var  addSqlParams = Object.values(req.body);
+
+        connection.query(addSql,addSqlParams,(error,results,fields)=>{
+            res.json({
+                code: 0,
+                message: "添加成功",
+                data:results
+            })
+        })
+    }
+
+    function updata(){
+        var keys = Object.keys(req.body),
+            length = [],
+            modSqlParams = []
+        keys.forEach((item,index)=>{
+            if(item != 'deskNum'){
+                length.push(item + '= ?')
+                modSqlParams.push(req.body[item])
+            }
+        })
+        var upDataSql = `UPDATE placelist SET ${length.join(',')} WHERE deskNum = "${req.body.deskNum}"`
+        connection.query(upDataSql,modSqlParams,(error, results, fields)=>{
+            if (error) throw error;
+            res.json({
+                code : 0,
+                message:'下单成功',
+                data:null
+            })
+        })
+    }
+})
+/**
+ * 根据桌号查询
+ */
+MyNode.get('/mysql/searchbydesk',(req,res)=>{
+    if(req.query.deskNum){
+        var select = `SELECT * FROM placelist WHERE deskNum = "${req.query.deskNum}"`
+    }else{
+        var select = `SELECT * FROM placelist`
+    }
+    connection.query(select,(error,results,fields)=>{
+        res.json({
+            code : 0,
+            message : '查询成功',
+            data:results
+        })
+    })
 })
 
 MyNode.listen(8888)

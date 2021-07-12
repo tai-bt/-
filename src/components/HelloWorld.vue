@@ -121,12 +121,12 @@ export default {
 				pageSize:this.pageSize,
 				currentPage:this.currentPage
 			}).then((res)=>{
-				this.tableData = res.data.data.list
+				this.tableData = res.data.list
 				if(this.tableData.length == 0 && this.currentPage != 1){
 					this.currentPage = this.currentPage - 1
 					this.MySqlNode()
 				}
-				this.total = res.data.data.total
+				this.total = res.data.total
 			})
 		},
 		UpdataList(val){
@@ -144,18 +144,14 @@ export default {
 			if(this.UpdataIs){ // 修改
 				this.body.date = this.$options.filters['GMTToStr'](this.body.date)
 				this.$post('/mysql/UpDataRow',this.body).then((res)=>{
-					if(res.data.code == 0){
-						this.MySqlNode()
-						this.dialogVisible = false
-					}
+					this.MySqlNode()
+					this.dialogVisible = false
 				})
 			}else{ // 添加
 				this.body.date = this.$options.filters['GMTToStr'](this.body.date)
 				this.$post('/mysql/addRow',this.body).then((res)=>{
-					if(res.data.code == 0){
-						this.MySqlNode()
-						this.dialogVisible = false
-					}
+					this.MySqlNode()
+					this.dialogVisible = false
 				})
 			}
 		},
@@ -170,9 +166,7 @@ export default {
 					id:val.id,
 					userId:this.userId
 				}).then((res)=>{
-					if(res.data.code == 0){
-						this.MySqlNode()
-					}
+					this.MySqlNode()
 				})
 			})
 		},

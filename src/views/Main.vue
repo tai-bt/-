@@ -5,7 +5,7 @@
 				<el-button size="small" @click="LogOut" class="fr t-mr20 t-mt15">退出登录</el-button>
 			</el-header>
 			<el-container>
-				<el-aside width="200px">
+				<el-aside width="200px" class="scrollStyle">
 					<el-menu
 						style="height:100%;width:100%;border:none"
 						:default-active="$route.path"
@@ -56,9 +56,7 @@ export default {
 			this.$post('/mysql/menuList',{
 				roleId:this.roleId
 			}).then((res)=>{
-				if(res.data.code == 0){
-					this.$store.commit('SET_COLLAPSE',this.forList(res.data.data))
-				}
+				this.$store.commit('SET_COLLAPSE',this.forList(res.data))
 			})
 		},
 		forList(val){
@@ -97,11 +95,12 @@ export default {
 }
   
 .el-aside {
-	min-height:calc(100vh - 60px);
-	overflow: auto;
+	height:calc(100vh - 60px);
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .el-main{
-	min-height:calc(100vh - 60px);
+	height:calc(100vh - 60px);
 	overflow: auto;
 }
 </style>

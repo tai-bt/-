@@ -92,8 +92,8 @@ axios.interceptors.response.use((response) => {
 Vue.prototype.$get = function (url) {
 	return new Promise((resolve, reject) => {
 		axios.get(url).then(response => {
-			if (response.data.code === 0) {
-				resolve(response)
+			if (response.data.code == 0) {
+				resolve(response.data)
 			} else {
 				// Message.warning(response.data.msg)
 			}
@@ -114,8 +114,8 @@ Vue.prototype.$post = function (url, data) {
 	}
 	return new Promise((resolve, reject) => {
 		axios.post(url, data).then(response => {
-			if (response.data.code === 0) {
-				resolve(response)
+			if (response.data.code == 0) {
+				resolve(response.data)
 			} else {
 				// Message.warning(response.data.msg)
 			}

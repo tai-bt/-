@@ -109,6 +109,28 @@ export const navRouter = [
 		}],
 	},
 	{
+		path:'/ordering',
+		name:'ordering',
+		component: Main,
+		children: [
+			{
+				path: 'food-variety',
+				name: 'food-variety',
+				component: () => import('@/views/ordering/food_variety.vue'),
+			},
+			{
+				path: 'place',
+				name: 'place',
+				component: () => import('@/views/ordering/place.vue'),
+			},
+			{
+				path: 'desk',
+				name: 'desk',
+				component: () => import('@/views/ordering/desk.vue'),
+			}
+		],
+	},
+	{
 		path:'/register',
 		name:'register',
 		component: () => import('@/components/login/register.vue'),

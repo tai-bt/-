@@ -8,6 +8,66 @@ body,html{
 	// filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1); /*ie*/
 	// filter: gray; /*ie9- */
 }
+/* webkit */
+.scrollStyle::-webkit-scrollbar{/*滚动条整体样式*/
+    width:4px !important;/*高宽分别对应横竖滚动条的尺寸*/
+    height:4px !important;
+}
+.scrollStyle::-webkit-scrollbar-thumb{/*滚动条里面小方块*/
+    border-radius:5px !important;
+    -webkit-box-shadow:inset005pxrgba(216,223,230,1) !important;
+    background:rgb(216,223,230) !important;
+}
+.scrollStyle::-webkit-scrollbar-track{/*滚动条里面轨道*/
+    -webkit-box-shadow:inset005pxrgba(230,237,245,1) !important;
+    border-radius:0 !important;
+    background:rgb(230,237,245) !important;
+}
+/*firefox*/
+.scrollStyle::-moz-scrollbar{/*滚动条整体样式*/
+    width:4px !important;/*高宽分别对应横竖滚动条的尺寸*/
+    height:4px !important;
+}
+.scrollStyle::-moz-scrollbar-thumb{/*滚动条里面小方块*/
+    border-radius:5px !important;
+    -moz-box-shadow:inset005pxrgba(216,223,230,1) !important;
+    background:rgb(216,223,230) !important;
+}
+.scrollStyle::-moz-scrollbar-track{/*滚动条里面轨道*/
+    -moz-box-shadow:inset005pxrgba(230,237,245,1) !important;
+    border-radius:0 !important;
+    background:rgb(230,237,245) !important;
+}
+/*ie9*/
+.scrollStyle::-ms-scrollbar{/*滚动条整体样式*/
+    width:4px !important;/*高宽分别对应横竖滚动条的尺寸*/
+    height:4px !important;
+}
+.scrollStyle::-ms-scrollbar-thumb{/*滚动条里面小方块*/
+    border-radius:5px !important;
+    -ms-box-shadow:inset005pxrgba(216,223,230,1) !important;
+    background:rgb(216,223,230) !important;
+}
+.scrollStyle::-ms-scrollbar-track{/*滚动条里面轨道*/
+    -ms-box-shadow:inset005pxrgba(230,237,245,1) !important;
+    border-radius:0 !important;
+    background:rgb(230,237,245) !important;
+}
+/*opera*/
+.scrollStyle::-o-scrollbar{/*滚动条整体样式*/
+    width:4px !important;/*高宽分别对应横竖滚动条的尺寸*/
+    height:4px !important;
+}
+.scrollStyle::-o-scrollbar-thumb{/*滚动条里面小方块*/
+    border-radius:5px !important;
+    -o-box-shadow:inset005pxrgba(216,223,230,1) !important;
+    background:rgb(216,223,230) !important;
+}
+.scrollStyle::-o-scrollbar-track{/*滚动条里面轨道*/
+    -o-box-shadow:inset005pxrgba(230,237,245,1) !important;
+    border-radius:0 !important;
+    background:rgb(230,237,245) !important;
+}
 
 .card{
 	width:30%;
@@ -58,7 +118,7 @@ body,html{
     }
     .el-dialog__footer{
         border-top: 1px solid #f3f7fb;
-        padding:30px 20px;
+        padding:20px 10px;
     }
     .el-dialog__footer{
         text-align: center;
