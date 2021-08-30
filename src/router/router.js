@@ -127,6 +127,11 @@ export const navRouter = [
 				path: 'desk',
 				name: 'desk',
 				component: () => import('@/views/ordering/desk.vue'),
+			},
+			{
+				path: 'history',
+				name: 'history',
+				component: () => import('@/views/ordering/history.vue'),
 			}
 		],
 	},

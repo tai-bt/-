@@ -161,21 +161,6 @@
 </script>
 
 <style lang="scss" scoped>
-.food-card{
-    // width: 30%;
-    // float: left;
-    .height{
-        height: 200px;
-        overflow: auto;
-    }
-    .text{
-        line-height: 25px;
-        .food-name{
-            float: right;
-            width: calc(100% - 50px);
-        }
-    }
-}
 .division{
     width: 100%;
     height: 1px;

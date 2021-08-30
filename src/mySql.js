@@ -457,7 +457,9 @@ MyNode.post('/mysql/updata-variety',(req,res)=>{
     }
 })
 /**
- * 下单
+ * 下单&&添加餐桌
+ * 根据deskNum查询  如果有就更新本条数据
+ * 如果没有  就新增桌号
  */
 MyNode.post('/mysql/updata-place',(req,res)=>{
     var select = `SELECT * FROM placelist WHERE deskNum = "${req.body.deskNum}"`
@@ -512,6 +514,23 @@ MyNode.post('/mysql/updata-place',(req,res)=>{
         })
     }
 })
+
+/**
+ * 删除餐桌
+ */
+MyNode.post('/mysql/delete-place', (req, res) => {
+    var  delectSql = `DELETE FROM placelist WHERE deskNum='${req.body.deskNum}'`;
+
+    connection.query(delectSql, function (error, results) {
+        if (error) throw error;
+        res.json({
+            code: 0,
+            message: "删除成功",
+            data:null
+        })
+    });
+})
+
 /**
  * 根据桌号查询
  */
@@ -521,6 +540,43 @@ MyNode.get('/mysql/searchbydesk',(req,res)=>{
     }else{
         var select = `SELECT * FROM placelist`
     }
+    connection.query(select,(error,results,fields)=>{
+        res.json({
+            code : 0,
+            message : '查询成功',
+            data:results
+        })
+    })
+})
+
+/**
+ * 结算 & 加入历史菜单
+ */
+MyNode.post('/mysql/add-history', (req, res) => {
+    let keys = Object.keys(req.body),
+        length = []
+    keys.forEach((item,index)=>{
+        length.push("?")
+    })
+
+    var  addSql = 'INSERT INTO historyOrder('+ keys +') VALUES('+ length.join(',') + ')';
+    var  addSqlParams = Object.values(req.body);
+
+    connection.query(addSql,addSqlParams,(error,results,fields)=>{
+        if (error) throw error;
+        res.json({
+            code: 0,
+            message: "添加成功",
+            data:null
+        })
+    })
+})
+
+/**
+ * 查询历史订单
+ */
+MyNode.get('/mysql/get-history', (req, res) => {
+    var select = `SELECT * FROM historyOrder`
     connection.query(select,(error,results,fields)=>{
         res.json({
             code : 0,

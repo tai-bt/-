@@ -124,3 +124,30 @@ body,html{
         text-align: center;
     }
 }
+
+.food-card{
+	.height{
+		height: 150px;
+		overflow: auto;
+	}
+	.text{
+		line-height: 25px;
+		font-size: 14px;
+		.food-name{
+			float: right;
+			width: calc(100% - 100px);
+		}
+		.food-num{
+			float: right;
+			width: 50px;
+		}
+	}
+	.button{
+		text-align: right;
+		font-size: 14px;
+	}
+	.delete{
+		text-align:right;
+		font-size:16px
+	}
+}

@@ -30,7 +30,71 @@ export default {
 			duration:1000,// 延长时间
 			decimals:2,// 小数点
 
-			value:'Hello World ~'
+			value:'Hello World ~',
+			value1: '',
+			obj:{
+				name: '文化节',
+				pick: '499',
+				oldPick:'599',
+				list:[
+					{
+						name:'灰姑娘校区',
+						timeValid: '3-12周岁',
+						distance: '0.7KM',
+						content:[
+							{
+								name: '启蒙芭蕾',
+								number: '300',
+								time: '30分钟',
+								cishu: '4次',
+								checked: false
+							},
+							{
+								name: '启蒙芭蕾',
+								number: '300',
+								time: '30分钟',
+								cishu: '4次',
+								checked: false
+							},
+							{
+								name: '启蒙芭蕾',
+								number: '300',
+								time: '30分钟',
+								cishu: '4次',
+								checked: false
+							},
+						]
+					},
+					{
+						name:'美术',
+						timeValid: '3-12周岁',
+						distance: '0.7KM',
+						content:[
+							{
+								name: '启蒙芭蕾',
+								number: '300',
+								time: '30分钟',
+								cishu: '4次',
+								checked: false
+							},
+							{
+								name: '启蒙芭蕾',
+								number: '300',
+								time: '30分钟',
+								cishu: '4次',
+								checked: false
+							},
+							{
+								name: '启蒙芭蕾',
+								number: '300',
+								time: '30分钟',
+								cishu: '4次',
+								checked: false
+							},
+						]
+					},
+				]
+			}
 		}
 	},
 	methods:{

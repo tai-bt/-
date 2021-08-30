@@ -10,10 +10,28 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2021-07-12 09:47:00
+Date: 2021-08-30 16:44:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for historyorder
+-- ----------------------------
+DROP TABLE IF EXISTS `historyorder`;
+CREATE TABLE `historyorder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `deskNum` char(5) NOT NULL,
+  `endTime` datetime NOT NULL,
+  `selectList` text,
+  `peopleNum` int(6) DEFAULT NULL,
+  `priceAll` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of historyorder
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for menulist
@@ -55,6 +73,7 @@ INSERT INTO `menulist` VALUES ('3942', '点餐系统', '1620265276577', '0', nul
 INSERT INTO `menulist` VALUES ('3942', '菜品管理', '1620265424570', '1620265276577', null, '/ordering/food-variety', '0,1,2');
 INSERT INTO `menulist` VALUES ('3942', '点餐管理', '1620265454617', '1620265276577', null, '/ordering/place', '0,1,2');
 INSERT INTO `menulist` VALUES ('3942', '餐桌管理', '1623919221011', '1620265276577', null, '/ordering/desk', '0,1,2');
+INSERT INTO `menulist` VALUES ('3942', '历史订单', '1630310543218', '1620265276577', null, '/ordering/history', '0,1,2');
 
 -- ----------------------------
 -- Table structure for node
@@ -93,16 +112,17 @@ DROP TABLE IF EXISTS `placelist`;
 CREATE TABLE `placelist` (
   `deskNum` char(5) NOT NULL COMMENT '桌号',
   `isCheckout` int(1) NOT NULL DEFAULT '0' COMMENT '0  未结账   1  已结账',
-  `selectList` text COMMENT '菜品',
-  `peopleNum` int(4) DEFAULT NULL COMMENT '吃饭人数'
+  `selectList` text NOT NULL COMMENT '菜品',
+  `peopleNum` int(6) NOT NULL COMMENT '吃饭人数'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of placelist
 -- ----------------------------
-INSERT INTO `placelist` VALUES ('1', '0', '[{\"id\":19,\"foodName\":\"糖醋里脊\",\"foodNum\":1,\"price\":50,\"num\":1},{\"id\":22,\"foodName\":\"菠萝鸡块\",\"foodNum\":4,\"price\":50,\"num\":1},{\"id\":20,\"foodName\":\"辣子鸡丁\",\"foodNum\":2,\"price\":30,\"num\":1},{\"id\":21,\"foodName\":\"宫保鸡丁\",\"foodNum\":3,\"price\":45,\"num\":1},{\"id\":23,\"foodName\":\"梅菜扣肉\",\"foodNum\":5,\"price\":60,\"num\":1}]', '10');
+INSERT INTO `placelist` VALUES ('1', '0', '[{\"id\":19,\"foodName\":\"糖醋里脊\",\"foodNum\":1,\"price\":50,\"num\":1},{\"id\":22,\"foodName\":\"菠萝鸡块\",\"foodNum\":4,\"price\":50,\"num\":1},{\"id\":20,\"foodName\":\"辣子鸡丁\",\"foodNum\":2,\"price\":30,\"num\":1},{\"id\":21,\"foodName\":\"宫保鸡丁\",\"foodNum\":3,\"price\":45,\"num\":1},{\"id\":23,\"foodName\":\"梅菜扣肉\",\"foodNum\":5,\"price\":60,\"num\":1},{\"id\":24,\"foodName\":\"餐具\",\"foodNum\":999,\"price\":2,\"num\":5}]', '10');
 INSERT INTO `placelist` VALUES ('11', '0', '', '0');
 INSERT INTO `placelist` VALUES ('2', '0', '', '0');
+INSERT INTO `placelist` VALUES ('1111', '0', '', '0');
 
 -- ----------------------------
 -- Table structure for role
@@ -132,13 +152,14 @@ CREATE TABLE `userinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `roleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of userinfo
 -- ----------------------------
 INSERT INTO `userinfo` VALUES ('taibingtao', '123456', '3942', '1', '0');
 INSERT INTO `userinfo` VALUES ('ceshi', 'qwerasdf', '8417', '2', '1');
+INSERT INTO `userinfo` VALUES ('123456789', '123456789', '2255', '4', '2');
 
 -- ----------------------------
 -- Table structure for variety
@@ -150,7 +171,7 @@ CREATE TABLE `variety` (
   `foodNum` int(11) NOT NULL,
   `price` float(11,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of variety
@@ -160,3 +181,4 @@ INSERT INTO `variety` VALUES ('20', '辣子鸡丁', '2', '30.00');
 INSERT INTO `variety` VALUES ('21', '宫保鸡丁', '3', '45.00');
 INSERT INTO `variety` VALUES ('22', '菠萝鸡块', '4', '50.00');
 INSERT INTO `variety` VALUES ('23', '梅菜扣肉', '5', '60.00');
+INSERT INTO `variety` VALUES ('24', '餐具', '999', '2.00');

@@ -51,7 +51,7 @@ export default {
 		},
 		getRole(){
 			this.$get('/mysql/roleSelect').then((res)=>{
-				this.roleList = res.data.data
+				this.roleList = res.data
 			})
 		},
 		goLogin(){
