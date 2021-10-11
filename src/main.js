@@ -45,10 +45,14 @@ Vue.prototype.utilMap = utilMap
 import util from './components/lib/util.js'
 Vue.mixin(util)
 
+// 切换语言
+import i18n from './i18n/i18n'
+
 // import '../../com/component.js'
 
 new Vue({
   render: h => h(App),
   router,
-  store
+  store,
+  i18n
 }).$mount('#app')

@@ -15,6 +15,21 @@
 			<h1>{{value}}</h1>
 		</div>
 		<el-button @click="get">qqqqqq</el-button>
+
+
+
+		<br />
+		<span class="title">{{$t('message.login')}}</span>
+		<el-dropdown @command="handleCommand">
+			<span class="el-dropdown-link">
+					中英文切换
+				<i class="el-icon-arrow-down el-icon--right"></i>
+			</span>
+			<el-dropdown-menu slot="dropdown">
+				<el-dropdown-item command="cn">中文</el-dropdown-item>
+				<el-dropdown-item command="en">英文</el-dropdown-item>
+			</el-dropdown-menu>
+		</el-dropdown>
 	</div>
 </template>
 
@@ -94,10 +109,30 @@ export default {
 						]
 					},
 				]
-			}
+			},
+			lang: ''
 		}
 	},
 	methods:{
+		// 根据下拉框的中被选中的值切换语言
+		handleCommand(command) {
+			// this.$message("click on item " + command);
+			switch (command) {
+				case "cn": {
+					this.lang = "cn";
+					this.$i18n.locale = this.lang;
+					break;
+				}
+				case "en": {
+					this.lang = "en";
+					this.$i18n.locale = this.lang;
+					break;
+				}
+
+				default:
+				break;
+			}
+		},
 		get(){
 			this.value = '你好啊';
 			console.log(this.$refs['hello'].innerText);
@@ -106,14 +141,15 @@ export default {
 			});
 		}
 	},
-	// mounted(){
-	// 	console.log(333);
-	// 	console.log(this.$refs['hello']);
-	// 	this.$nextTick(() => {
-	// 		console.log(444);
-	// 		console.log(this.$refs['hello']);
-	// 	});
-	// },
+	mounted(){
+		console.log(this.$route)
+		// console.log(333);
+		// console.log(this.$refs['hello']);
+		// this.$nextTick(() => {
+		// 	console.log(444);
+		// 	console.log(this.$refs['hello']);
+		// });
+	},
 	// created() {
 	// 	console.log(111);
 	// 	console.log(this.$refs['hello']);

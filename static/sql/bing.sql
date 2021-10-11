@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50727
 File Encoding         : 65001
 
-Date: 2021-08-30 16:44:45
+Date: 2021-10-11 15:59:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,11 +27,12 @@ CREATE TABLE `historyorder` (
   `peopleNum` int(6) DEFAULT NULL,
   `priceAll` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of historyorder
 -- ----------------------------
+INSERT INTO `historyorder` VALUES ('1', '11', '2021-09-07 10:48:32', '[{\"id\":20,\"foodName\":\"辣子鸡丁\",\"foodNum\":2,\"price\":30,\"num\":2},{\"id\":19,\"foodName\":\"糖醋里脊\",\"foodNum\":1,\"price\":50,\"num\":1},{\"id\":22,\"foodName\":\"菠萝鸡块\",\"foodNum\":4,\"price\":50,\"num\":1},{\"id\":21,\"foodName\":\"宫保鸡丁\",\"foodNum\":3,\"price\":45,\"num\":1},{\"id\":23,\"foodName\":\"梅菜扣肉\",\"foodNum\":5,\"price\":60,\"num\":1},{\"id\":24,\"foodName\":\"餐具\",\"foodNum\":999,\"price\":2,\"num\":6}]', '6', '277');
 
 -- ----------------------------
 -- Table structure for menulist
