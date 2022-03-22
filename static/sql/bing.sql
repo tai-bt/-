@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : tai
-Source Server Version : 50727
+Source Server Version : 50735
 Source Host           : localhost:3306
 Source Database       : bing
 
 Target Server Type    : MYSQL
-Target Server Version : 50727
+Target Server Version : 50735
 File Encoding         : 65001
 
-Date: 2021-10-11 15:59:08
+Date: 2022-03-22 16:58:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,6 +75,9 @@ INSERT INTO `menulist` VALUES ('3942', '菜品管理', '1620265424570', '1620265
 INSERT INTO `menulist` VALUES ('3942', '点餐管理', '1620265454617', '1620265276577', null, '/ordering/place', '0,1,2');
 INSERT INTO `menulist` VALUES ('3942', '餐桌管理', '1623919221011', '1620265276577', null, '/ordering/desk', '0,1,2');
 INSERT INTO `menulist` VALUES ('3942', '历史订单', '1630310543218', '1620265276577', null, '/ordering/history', '0,1,2');
+INSERT INTO `menulist` VALUES ('3942', 'Excel处理', '1647930306928', '0', null, '', '0,1,2');
+INSERT INTO `menulist` VALUES ('3942', 'Excel转table', '1647930336256', '1647930306928', null, '/Excel/Excel-table', '0,1,2');
+INSERT INTO `menulist` VALUES ('3942', 'table转Excel', '1647930346032', '1647930306928', null, '/Excel/table-Excel', '0,1,2');
 
 -- ----------------------------
 -- Table structure for node

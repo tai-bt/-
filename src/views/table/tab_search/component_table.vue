@@ -66,7 +66,7 @@ export default {
 				list.unshift(
 					{
 						width:1,
-						components:'tabsearch'
+						// components:'tabsearch'
 					}
 				)
 			}

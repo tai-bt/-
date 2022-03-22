@@ -68,7 +68,9 @@ export default {
 		}
 	},
 	computed:{
-		...mapGetters(['menuList']),
+		...mapGetters({
+			menuList: 'common/menuList'
+		}),
 		roleId(){
 			return this.$store.state.roleId
 		},
@@ -101,7 +103,7 @@ export default {
 			this.$post('/mysql/menuList',{
 				roleId:this.roleId
 			}).then((res)=>{
-				this.$store.commit('SET_COLLAPSE',this.forList(res.data))
+				this.$store.commit('common/SET_COLLAPSE',this.forList(res.data))
 			})
 		},
 		// 处理数据，整成树形
@@ -133,6 +135,10 @@ export default {
 			this.AddDialog = true
 		},
 		addParentMenu(){
+			if (this.partantMenu.roleId.length == 0) {
+				this.$message.error('最少选择一个权限')
+				return
+			}
 			this.partantMenu.roleId = this.partantMenu.roleId.join(',')
 			if(this.UpdataIs){
 				var data = {

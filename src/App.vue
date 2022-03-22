@@ -17,14 +17,14 @@ export default {
 	},
 	methods:{
 		scrollToTop(){
-			const c = document.documentElement.scrollTop || document.body.scrollTop;
+			const c = document.documentElement.scrollTop || document.body.scrollTop || document.getElementById('scroll').scrollTop;
 			if (c > 0) {
 				window.requestAnimationFrame(this.scrollToTop);
-				window.scrollTo(0, c - c / 20);
+				document.getElementById('scroll').scrollTo(0, c - c / 20);
 			}
 		},
 		backTopShowOperate : function() {
-			if (window.scrollY > 300) {
+			if (document.getElementById('scroll').scrollTop > 300) {
 				this.showIs = true;
 			} else {
 				this.showIs = false;

@@ -41,7 +41,9 @@ export default {
 		}
 	},
 	computed:{
-		...mapGetters(['menuList']),
+		...mapGetters({
+			menuList: 'common/menuList'
+		}),
 		roleId(){
 			return this.$store.state.roleId
 		}
@@ -56,7 +58,7 @@ export default {
 			this.$post('/mysql/menuList',{
 				roleId:this.roleId
 			}).then((res)=>{
-				this.$store.commit('SET_COLLAPSE',this.forList(res.data))
+				this.$store.commit('common/SET_COLLAPSE',this.forList(res.data))
 			})
 		},
 		forList(val){

@@ -136,6 +136,23 @@ export const navRouter = [
 		],
 	},
 	{
+		path:'/Excel',
+		name:'Excel',
+		component: Main,
+		children: [
+			{
+				path: 'table-Excel',
+				name: 'table-Excel',
+				component: () => import('@/views/Excel/table_Excel.vue'),
+			},
+			{
+				path: 'Excel-table',
+				name: 'Excel-table',
+				component: () => import('@/views/Excel/Excel_table.vue'),
+			}
+		],
+	},
+	{
 		path:'/register',
 		name:'register',
 		component: () => import('@/components/login/register.vue'),
@@ -144,7 +161,7 @@ export const navRouter = [
 		path:'/login',
 		name:'login',
 		component: () => import('@/components/login/login.vue'),
-	}
+	},
 ]
 
 const routers = [

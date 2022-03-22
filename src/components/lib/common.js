@@ -1,5 +1,5 @@
 var common = {
-    namespace: true,
+    namespaced: true,
     state: {
         menuList: [],
     },
