@@ -97,7 +97,7 @@ export default {
 					let b = (lastIndex+lastIndex-nowIndex) < this.length ? lastIndex+lastIndex-nowIndex : this.length
 					this.test(a, b)
 				} else {
-					alert('走完了')
+					alert('走完了1')
 				}
 			})
 		}
