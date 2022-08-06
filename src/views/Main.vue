@@ -37,7 +37,9 @@ export default {
 	components:{MenuLeft},
 	data(){
 		return{
-			list:[],
+			list: [],
+			length: 98,
+			allList: []
 		}
 	},
 	computed:{
@@ -51,6 +53,9 @@ export default {
 	watch:{
 		menuList(res){
 			this.list = res
+		},
+		allList(res) {
+			console.log(res)
 		}
 	},
 	methods:{
@@ -79,11 +84,27 @@ export default {
 		},
 		LogOut(){
 			this.$router.push({path:'/login'})
+		},
+		test(nowIndex, lastIndex) {
+			let listPromise = []
+			for (var i=nowIndex; i < lastIndex; i++) {
+				let a = this.$get(`/mysql/roleSelect?id=${i}`)
+				listPromise.push(a)
+			}
+			Promise.allSettled(listPromise).then(res => {
+				if (res.length == lastIndex-nowIndex && lastIndex < this.length) {
+					let a = lastIndex
+					let b = (lastIndex+lastIndex-nowIndex) < this.length ? lastIndex+lastIndex-nowIndex : this.length
+					this.test(a, b)
+				} else {
+					alert('走完了')
+				}
+			})
 		}
 	},
 	mounted(){
 		this.getMenuList()
-		
+		// this.test(0, 10)
 	}
 }
 </script>

@@ -162,8 +162,8 @@ export default {
 			})
 		},
 		async getallData () {
-			await this.getmenu()
 			await this.getvariety() 
+			await this.getmenu()
 			await this.getHistory() 
 		}
 	},
@@ -189,7 +189,7 @@ export default {
 		// 	console.log(this.$refs['hello']);
 		// });
 		// 依次调接口
-		// this.getallData()
+		this.getallData()
 	},
 	beforeUpdate(){
 		// console.log('beforeUpdate', 'count')

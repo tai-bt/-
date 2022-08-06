@@ -40,6 +40,13 @@ export default {
 	},
 	mounted(){
 		sessionStorage.clear()
+		
+		setTimeout(()=>{
+			this.$store.commit('todos', [10,11,12,13,14,15,16,17,18,19,20])
+		}, 3000)
+		setTimeout(()=>{
+			console.log(this.$store.getters.getTodoById)
+		}, 4000)
 	}
 }
 </script>

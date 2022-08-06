@@ -12,8 +12,13 @@ export default new Vuex.Store({
     state:{
         userId:sessionStorage.getItem('userId')?sessionStorage.getItem('userId'):'',
         roleId:sessionStorage.getItem('roleId')?sessionStorage.getItem('roleId'):'',
+        todos: [1,2,3,4,5,6]
     },
-    getters:{},
+    getters:{
+        getTodoById: (state) => {
+            return state.todos.filter(todo => {return todo%2 == 0})
+        }
+    },
     mutations:{
         userId(state,userId){
             sessionStorage.setItem('userId',userId)
@@ -22,6 +27,9 @@ export default new Vuex.Store({
         roleId(state,roleId){
             sessionStorage.setItem('roleId',roleId)
             state.roleId = roleId
+        },
+        todos(state,todos){
+            state.todos = todos
         }
     },
     actions: {}
